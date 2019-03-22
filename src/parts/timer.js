@@ -10,21 +10,17 @@ function timer() {
         minutes = Math.floor((t / 1000 / 60) % 60).toString(),
         hours = Math.floor(t / 1000 / 60 / 60).toString();
 
-    if (seconds.length < 2) {
-      seconds = `0${seconds}`;
-    }
-    if (minutes.length < 2) {
-      minutes = `0${minutes}`;
-    }
-    if (hours.length < 2) {
-      hours = `0${hours}`;
-    }
+        function twoLetter(arg) {
+          if (arg.length < 2) {
+            arg = '0' + arg;
+          } return arg;
+        }
 
     return {
       'total': t,
-      'hours': hours,
-      'minutes': minutes,
-      'seconds': seconds
+      'hours': twoLetter(hours),
+      'minutes': twoLetter(minutes),
+      'seconds': twoLetter(seconds)
     };
   }
 

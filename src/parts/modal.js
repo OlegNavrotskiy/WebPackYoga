@@ -31,6 +31,7 @@ function modal() {
       document.body.style.overflow = 'hidden';
     });
     close.addEventListener('click', () => {
+      document.querySelector('.status').innerHTML = '';
       overlay.style.display = 'none';
       more.classList.remove('more-splash');
       document.body.style.overflow = '';
@@ -50,6 +51,7 @@ function modal() {
     });
 
     close.addEventListener('click', () => {
+      document.querySelector('.status').innerHTML = '';
       overlay.style.display = 'none';
       document.body.style.overflow = '';
     });
@@ -73,6 +75,7 @@ function modal() {
     });
 
     close.addEventListener('click', () => {
+      document.querySelector('.status').innerHTML = '';
       overlay.style.display = 'none';
       document.body.style.overflow = '';
     });

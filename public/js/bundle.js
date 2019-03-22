@@ -339,6 +339,7 @@ function modal() {
       document.body.style.overflow = 'hidden';
     });
     close.addEventListener('click', function () {
+      document.querySelector('.status').innerHTML = '';
       overlay.style.display = 'none';
       more.classList.remove('more-splash');
       document.body.style.overflow = '';
@@ -355,6 +356,7 @@ function modal() {
       document.body.style.overflow = 'hidden';
     });
     close.addEventListener('click', function () {
+      document.querySelector('.status').innerHTML = '';
       overlay.style.display = 'none';
       document.body.style.overflow = '';
     });
@@ -374,6 +376,7 @@ function modal() {
       }, 600);
     });
     close.addEventListener('click', function () {
+      document.querySelector('.status').innerHTML = '';
       overlay.style.display = 'none';
       document.body.style.overflow = '';
     });
@@ -604,23 +607,19 @@ function timer() {
         minutes = Math.floor(t / 1000 / 60 % 60).toString(),
         hours = Math.floor(t / 1000 / 60 / 60).toString();
 
-    if (seconds.length < 2) {
-      seconds = "0".concat(seconds);
-    }
+    function twoLetter(arg) {
+      if (arg.length < 2) {
+        arg = '0' + arg;
+      }
 
-    if (minutes.length < 2) {
-      minutes = "0".concat(minutes);
-    }
-
-    if (hours.length < 2) {
-      hours = "0".concat(hours);
+      return arg;
     }
 
     return {
       'total': t,
-      'hours': hours,
-      'minutes': minutes,
-      'seconds': seconds
+      'hours': twoLetter(hours),
+      'minutes': twoLetter(minutes),
+      'seconds': twoLetter(seconds)
     };
   }
 
