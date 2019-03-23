@@ -1,19 +1,25 @@
 function modal() {
   let more = document.querySelector('.more'),
-      tabsBtn = document.querySelector('.description-btn'),
+      tabsBtn = document.querySelectorAll('.description-btn'),
       browser = getNameBrowser();
 
   if (browser == 'EDGE' || browser == 'MSIE') {
     modalWindow(more);
-    modalWindow(tabsBtn);
+    tabsBtn.forEach((item) => {
+      modalWindow(item);
+    });
   } else {
     if (!isMobile()) {
       modalWindowJs(more);
-      modalWindowJs(tabsBtn);
+      tabsBtn.forEach((item) => {
+        modalWindowJs(item);
+      });
     } else {
       if (isMobile()) {
         modalMobileWindow(more);
-        modalMobileWindow(tabsBtn);
+        tabsBtn.forEach((item) => {
+          modalMobileWindow(item);
+        });
       }
     }
 
@@ -31,7 +37,9 @@ function modal() {
       document.body.style.overflow = 'hidden';
     });
     close.addEventListener('click', () => {
-      document.querySelector('.status').innerHTML = '';
+      if (document.querySelector('.status') !== null) {
+        document.querySelector('.status').innerHTML = '';
+      }
       overlay.style.display = 'none';
       more.classList.remove('more-splash');
       document.body.style.overflow = '';
@@ -51,7 +59,9 @@ function modal() {
     });
 
     close.addEventListener('click', () => {
-      document.querySelector('.status').innerHTML = '';
+      if (document.querySelector('.status') !== null) {
+        document.querySelector('.status').innerHTML = '';
+      }
       overlay.style.display = 'none';
       document.body.style.overflow = '';
     });
@@ -75,7 +85,9 @@ function modal() {
     });
 
     close.addEventListener('click', () => {
-      document.querySelector('.status').innerHTML = '';
+      if (document.querySelector('.status') !== null) {
+        document.querySelector('.status').innerHTML = '';
+      }
       overlay.style.display = 'none';
       document.body.style.overflow = '';
     });

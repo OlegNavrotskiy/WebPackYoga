@@ -143,7 +143,7 @@ function calc() {
     personSum = +this.value;
     total = (personSum + daysSum) * 4000;
 
-    if (restDays.value == '' || persons.value == '') {
+    if (restDays.value == '' || persons.value == '' || restDays.value <= 0 || persons.value <= 0) {
       totalValue.innerHTML = 0;
     } else {
       animateTotal(total);
@@ -153,14 +153,14 @@ function calc() {
     daysSum = +this.value;
     total = (personSum + daysSum) * 4000;
 
-    if (persons.value == '' || restDays.value == '') {
+    if (persons.value == '' || restDays.value == '' || restDays.value <= 0 || persons.value <= 0) {
       totalValue.innerHTML = 0;
     } else {
       animateTotal(total);
     }
   });
   place.addEventListener('change', function () {
-    if (restDays.value == '' || persons.value == '') {
+    if (restDays.value == '' || persons.value == '' || restDays.value <= 0 || persons.value <= 0) {
       totalValue.innerHTML = 0;
     } else {
       var a = total,
@@ -307,20 +307,26 @@ module.exports = form;
 
 function modal() {
   var more = document.querySelector('.more'),
-      tabsBtn = document.querySelector('.description-btn'),
+      tabsBtn = document.querySelectorAll('.description-btn'),
       browser = getNameBrowser();
 
   if (browser == 'EDGE' || browser == 'MSIE') {
     modalWindow(more);
-    modalWindow(tabsBtn);
+    tabsBtn.forEach(function (item) {
+      modalWindow(item);
+    });
   } else {
     if (!isMobile()) {
       modalWindowJs(more);
-      modalWindowJs(tabsBtn);
+      tabsBtn.forEach(function (item) {
+        modalWindowJs(item);
+      });
     } else {
       if (isMobile()) {
         modalMobileWindow(more);
-        modalMobileWindow(tabsBtn);
+        tabsBtn.forEach(function (item) {
+          modalMobileWindow(item);
+        });
       }
     }
   } // Modal CSS
@@ -339,7 +345,10 @@ function modal() {
       document.body.style.overflow = 'hidden';
     });
     close.addEventListener('click', function () {
-      document.querySelector('.status').innerHTML = '';
+      if (document.querySelector('.status') !== null) {
+        document.querySelector('.status').innerHTML = '';
+      }
+
       overlay.style.display = 'none';
       more.classList.remove('more-splash');
       document.body.style.overflow = '';
@@ -356,7 +365,10 @@ function modal() {
       document.body.style.overflow = 'hidden';
     });
     close.addEventListener('click', function () {
-      document.querySelector('.status').innerHTML = '';
+      if (document.querySelector('.status') !== null) {
+        document.querySelector('.status').innerHTML = '';
+      }
+
       overlay.style.display = 'none';
       document.body.style.overflow = '';
     });
@@ -376,7 +388,10 @@ function modal() {
       }, 600);
     });
     close.addEventListener('click', function () {
-      document.querySelector('.status').innerHTML = '';
+      if (document.querySelector('.status') !== null) {
+        document.querySelector('.status').innerHTML = '';
+      }
+
       overlay.style.display = 'none';
       document.body.style.overflow = '';
     });
