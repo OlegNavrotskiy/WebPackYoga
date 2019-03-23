@@ -3,7 +3,7 @@ function modal() {
       tabsBtn = document.querySelectorAll('.description-btn'),
       browser = getNameBrowser();
 
-  if (browser == 'EDGE' || browser == 'MSIE') {
+  if (browser < 12) {
     modalWindow(more);
     tabsBtn.forEach((item) => {
       modalWindow(item);
@@ -110,14 +110,28 @@ function modal() {
   }
 
   // Проверка браузера
+  //Числовое значение, на которое пользователь Internet Explorer включен.
+  //Если на Microsoft Edge возвращается номер 12.
   function getNameBrowser() {
-    const ua = navigator.userAgent;
-    if (ua.search(/EDGE/) > 0) {
-      return 'EDGE';
+    let rv = -1;
+
+    if (navigator.appName == 'Microsoft Internet Explorer') {
+
+      let ua = navigator.userAgent,
+        re = new RegExp("MSIE ([0-9]{1,}[\\.0-9]{0,})");
+
+      if (re.exec(ua) !== null) {
+        rv = parseFloat(RegExp.$1);
+      }
+    } else if (navigator.appName == "Netscape") {
+
+      if (navigator.appVersion.indexOf('Trident') === -1) {
+        rv = 12;
+      } else {
+        rv = 11;
+      }
     }
-    if (ua.search(/MSIE/) > 0) {
-      return 'MSIE';
-    }
+    return rv;
   }
 
   //Проверка на моб.версию
