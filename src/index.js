@@ -1,3 +1,5 @@
+//require('es6-promise').polyfill();
+require('formdata-polyfill');
 window.addEventListener('DOMContentLoaded', () => {
 
   "USE STRICT";
@@ -18,3 +20,12 @@ window.addEventListener('DOMContentLoaded', () => {
   timer();
 
 }); //конец DOMContentLoaded
+if ('NodeList' in window && !NodeList.prototype.forEach) {
+  console.info('polyfill for IE11');
+  NodeList.prototype.forEach = function (callback, thisArg) {
+    thisArg = thisArg || window;
+    for (var i = 0; i < this.length; i++) {
+      callback.call(thisArg, this[i], i, this);
+    }
+  };
+}
